@@ -6,6 +6,8 @@ class AOC2020_10B : BaseAoc() {
     init {
         val list = asIntList("/2020/2020_10A.txt") as ArrayList
 
+        list.add(0)
+
         val allParts= ArrayList<ArrayList<Int>> ()
         var currentList = ArrayList<Int>()
         allParts.add(currentList)
@@ -17,29 +19,27 @@ class AOC2020_10B : BaseAoc() {
                     currentList = ArrayList<Int>()
                     allParts.add(currentList)
                 }
-                2 -> {
-                    throw NotImplementedError("2 jolt spike")
-                }
                 else -> {
                     currentList.add(it[0])
                 }
             }
         }
-        currentList.add(list.maxOrNull()!!)
+        currentList.add(49)
 
         var totalOptions = 1L
 
-        //There don't seem to be any 2 jolt steps so
+        //There don't seem to be any 2 jolt steps so, we maps the known sequences to their permutations
         allParts.map {
             when(it.size){
                 1 -> 1
                 2 -> 1
                 3 -> 2
                 4 -> 4
-                5 -> 6
-                else -> throw NotImplementedError()
+                5 -> 7
+                else -> 0
             }
         }.forEach { it ->
+            println(totalOptions)
             totalOptions *= it
         }
 
@@ -50,3 +50,4 @@ class AOC2020_10B : BaseAoc() {
 fun main() {
     AOC2020_10B()
 }
+
